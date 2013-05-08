@@ -1,0 +1,6 @@
+{
+  "port": 9999,
+  "encoding": "json",
+  "path": "/tmp/foo",
+  "require": "./example/db.js"
+}
