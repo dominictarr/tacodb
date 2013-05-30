@@ -1,39 +1,51 @@
 
 var createDb = require('../db')
 
-var db = createDb('RANDOM'+~~(Math.random()*1000000))
+var update = createDb('RANDOM'+~~(Math.random()*1000000))
 var fs = require('fs')
 var bundle   = require('securify/bundle')
 
 var pull = require('pull-stream')
 var pl   = require('pull-level')
 
-bundle(__dirname+'/../examples/db.js', function (err, b) {
-  bundle(__dirname+'/../examples/db2.js', function (err, b2) {
+var test = require('tape')
 
-    db.update(b)
+test('update', function (t) {
 
-    console.log(db)
+  bundle(__dirname+'/../examples/db.js', function (err, b) {
+    bundle(__dirname+'/../examples/db2.js', function (err, b2) {
+      console.log('BUNDLED')
+      update(b, function (err, db, domain) {
+        console.log('UPDATED')
+        pull.values([
+          {key: 'a', value: 'apple'},
+          {key: 'b', value: 'banana'},
+          {key: 'c', value: 'cherry'},
+          {key: 'd', value: 'durian'},
+          {key: 'e', value: 'elder-berry'}
+        ]).pipe(pl.write(db, function (err) {
 
-    pull.values([
-      {key: 'a', value: 'apple'},
-      {key: 'b', value: 'banana'},
-      {key: 'c', value: 'cherry'},
-      {key: 'd', value: 'durian'},
-      {key: 'e', value: 'elder-berry'}
-    ]).pipe(pl.write(db, function (err) {
+          db.get('e', function (err, value) {
+            update(b2, function (err, _db, domain) {
 
-      db.get('e', function (err, value) {
-
-        console.log(value)
-
-        db.update(b2, function (err) {
-          console.log('updated')
-        })
- 
+              pl.read(_db)
+              .pipe(pull.reduce(function (a, e) {
+                a[e.key] = e.value
+                return a
+              }, {}, function (err, all) {
+                console.log(all)
+                t.deepEqual(all, { a: 'apple',
+                  b: 'banana',
+                  c: 'cherry',
+                  d: 'durian',
+                  e: 'elder-berry' 
+                })
+                t.end()
+              }))
+            }) 
+          })
+        }))
       })
-
-    }))
-
+    })
   })
 })
