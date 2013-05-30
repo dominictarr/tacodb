@@ -1,8 +1,10 @@
-var levelup  = require('levelup')
+var levelup  = require('level')
 var config   = require('./config')
 var securify = require('securify')
 var bundle   = require('securify/bundle')
 var path     = require('path')
+var EventEmitter
+             = require('events').EventEmitter
 
 // (update closing update* closed updated)*
 // update can be a new bundle, or stop.
@@ -13,45 +15,58 @@ var path     = require('path')
 // make a simple app, and update it.
 module.exports = 
 function Db(id) {
-  var db = levelup(path.join(config.root, id))
+  var db, _cb
   var state = 'ready'
   var bundle, current
 
   var domain
 
-  function start () {
-    //EVENT: updated
-    state = 'running'
-    current = bundle
-    domain = securify(bundle)(db)
+  var emitter = new EventEmitter()
+
+  function close (cb) {
+    var n = 1
+
+    db.on('closed', function () {
+      if(--n) return
+      domain.dispose()
+      cb()
+    })
+
+    db.on('error', function (err) {
+      if(--n) return
+      domain.dispose()
+      cb(err)
+    })
+
+    db.close()
   }
 
-  db.on('closed', function () {
-    //EVENT: closed
-    //was closing the database...
-    domain && domain.dispose()
-    if(bundle == current) {
-      //EVENT: stopped
-      return
-    }
-    start()
-  })
+  function start (bundle, cb) {
+    //EVENT: updated
+    state = 'running'
+    db = levelup(path.join(config.root, id))
+    domain = securify(bundle)(db)
+    emitter.db = db
+    emitter.domain = domain
+    cb(null, db, domain)
+  }
 
-  db.update = function (_bundle) {
-    //update wasn't a change, do nothing...
-    if(current == _bundle) return
+  emitter.update = function (_bundle, cb) {
 
     //EVENT: update
     bundle = _bundle
     if(state == 'ready') {
-      start()
+      start(_bundle, cb)
     }
     else if (state == 'running') {
       //EVENT: closing
       state = 'closing'
-      db.close()
+      close(function (err) {
+        if(err) return cb(err)
+        state = 'ready'
+        start(bundle, cb)
+      })
     }
   }
-
-  return db
+  return emitter
 }
