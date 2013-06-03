@@ -1,7 +1,7 @@
 
 var createDb = require('../db')
 
-var update = createDb('RANDOM'+~~(Math.random()*1000000))
+var boxedDb = createDb('RANDOM'+~~(Math.random()*1000000))
 var fs = require('fs')
 var bundle   = require('securify/bundle')
 
@@ -10,12 +10,16 @@ var pl   = require('pull-level')
 
 var test = require('tape')
 
+process.on('uncaughtException', function (e) {
+  console.error(e.stack)
+})
+
 test('update', function (t) {
 
   bundle(__dirname+'/../examples/db.js', function (err, b) {
     bundle(__dirname+'/../examples/db2.js', function (err, b2) {
       console.log('BUNDLED')
-      update(b, function (err, db, domain) {
+      boxedDb.update(b, function (err, db, domain) {
         console.log('UPDATED')
         pull.values([
           {key: 'a', value: 'apple'},
@@ -26,7 +30,7 @@ test('update', function (t) {
         ]).pipe(pl.write(db, function (err) {
 
           db.get('e', function (err, value) {
-            update(b2, function (err, _db, domain) {
+            boxedDb.update(b2, function (err, _db, domain) {
 
               pl.read(_db)
               .pipe(pull.reduce(function (a, e) {
