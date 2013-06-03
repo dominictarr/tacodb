@@ -11,13 +11,16 @@
     "shoe": "0.0.10",
     "stack": "~0.1.0",
     "level-static": "~1.0.6",
-    "stream-to-pull-stream": "~1.2.0",
+    "stream-to-pull-stream": "~1.2.1",
     "request": "~2.21.0",
-    "securify": "~1.1.2",
+    "securify": ">=1.1 <2",
     "mkdirp": "~0.3.5",
     "rc": "~0.3.0",
     "level": "~0.8.0",
-    "level-sublevel": "~4.6.4"
+    "level-sublevel": ">=4.6 <5",
+    "pull-level": "~1.1.3",
+    "level-live-stream": "~1.4.3",
+    "through": "~2.3.4"
   },
   "devDependencies": {
     "tape": "~1.0.2",
