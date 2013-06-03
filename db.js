@@ -41,14 +41,38 @@ function Db(id) {
     db.close()
   }
 
+  var events = ['console_log', 'console_error', 'error']
+  var db_events = ['ready', 'closed']
+
+  function reemit (source, events) {
+    var removers = []
+
+    events.forEach(function (event) { 
+      function onEvent (value) {
+        emitter.emit('log', event, value)
+      }
+      source.on(event, onEvent)
+      removers.push(function () {
+        source.removeListener(event, onEvent)
+      })
+    })
+    return function () {
+      removers.forEach(function (e) { e() })
+    }
+  }
+
   function start (bundle, cb) {
     //EVENT: updated
     state = 'running'
     db = levelup(path.join(config.root, id))
     domain = securify(bundle)(db)
+
+    db.once('closed', reemit(domain, events))
+    db.once('closed', reemit(db, db_events))
+
     emitter.db = db
     emitter.domain = domain
-    cb(null, db, domain)
+    cb && cb(null, db, domain)
   }
 
   emitter.update = function (_bundle, cb) {
@@ -68,5 +92,6 @@ function Db(id) {
       })
     }
   }
+
   return emitter
 }
