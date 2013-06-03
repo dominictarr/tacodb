@@ -1,13 +1,17 @@
 #! /usr/bin/env node
 
+var http    = require('http')
+var path    = require('path')
+var cp      = require('child_process')
+
+var shoe    = require('shoe')
+var levelup = require('level')
 var request = require('request')
+var split   = require('split')
+var through = require('through')
+
 var bundle  = require('securify/bundle')
 var config  = require('./config')
-var cp      = require('child_process')
-var path    = require('path')
-var shoe    = require('shoe')
-var http    = require('http')
-var levelup = require('level')
 
 var commands = {
   bundle: function (config, cb) {
@@ -56,6 +60,21 @@ var commands = {
   },
   config: function (config, cb) {
     console.log(JSON.stringify(config, null, 2))
+    cb()
+  },
+  log: function (config, cb) {
+
+    request({
+      uri: config.master + '/log/' + config.name,
+      qs: {
+        min: config.since || config.min,
+        max: config.until || config.max,
+        tail: config.tail
+      }
+    })
+    .pipe(split(null, null, JSON.parse))
+    .pipe(through(console.log))
+
     cb()
   }
 }
