@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 var request = require('request')
 var bundle  = require('securify/bundle')
 var config  = require('./config')
@@ -8,6 +10,13 @@ var http    = require('http')
 var levelup = require('level')
 
 var commands = {
+  bundle: function (config, cb) {
+    bundle(config._[0])
+      .pipe(
+        config.o ? fs.createWriteStream(config.o)
+                 : process.stdout
+      )
+  },
   update: function (config, cb) {
     bundle(
       config.main || config._[0] || './index.js'
@@ -39,16 +48,23 @@ var commands = {
     )
   },
   start: function (config, cb) {
-    require('./server')(config, cb)
+    require('./server')(config, function (err) {
+      if(err) return cb(err)
+      console.error('listening on:', config.port)
+      cb()
+    })
+  },
+  config: function (config, cb) {
+    console.log(JSON.stringify(config, null, 2))
+    cb()
   }
 }
 
 var command = config._.shift()
 
-
 function exec (cmd, cb) {
   if(!cmd) return cb()
-  console.error('>' + cmd)
+  console.error('>', cmd)
   cp.exec(cmd, cb)
 }
 
@@ -57,7 +73,7 @@ function run (command, cb) {
     if(err) return cb(err)
     commands[command](config, function (err) {
       if(err) return cb(err)
-      exec(config.on['post-' + command], function (err) {  
+      exec(config.on && config.on['post-' + command], function (err) {  
         cb(err)
       })
     })
