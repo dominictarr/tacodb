@@ -58,7 +58,7 @@ function log(req, res, next) {
 }
 
 function tail(name, opts) {
-  opts.min = name + '\x00' + (opts.since || Date.now())
+  opts.min = name + '\x00' + (opts.min || opts.since || Date.now())
 
   for(var k in opts)
     if(opts[k] === 'false') opts[k] = false
