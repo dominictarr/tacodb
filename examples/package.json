@@ -1,0 +1,12 @@
+{
+  "name": "examples",
+  "version": "0.0.0",
+  "dependencies": {
+    "map-reduce": "~3.2.3",
+    "level-static": "~1.0.7",
+    "multilevel": "~4.0.2"
+  },
+  "devDependencies": {},
+  "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
+  "license": "MIT"
+}
