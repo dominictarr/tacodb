@@ -1,24 +1,30 @@
-var http = require('http')
-var shoe = require('shoe')
+var http       = require('http')
+var url        = require('url')
+var qs         = require('querystring')
 
-//fix this
-var levelup = require('level')
-var sublevel = require('level-sublevel')
-var master = sublevel(levelup('/tmp/tacodb'))
-var static = require('level-static')
-var sublevel = require('level-sublevel')
+var shoe       = require('shoe')
+var stack      = require('stack')
+var timestamp  = require('monotonic-timestamp')
 
-var master = require('./master-db')
-var stack = require('stack')
+var levelup    = require('level')
+var sublevel   = require('level-sublevel')
+var static     = require('level-static')
 
-var prefix = '/ws/([\\w-\\d]+)'
-var rxWs = new RegExp('^'+prefix)
-var rxHttp = /^\/http\/([\w-\d]+)/
+var pull       = require('pull-stream')
+var toPull     = require('stream-to-pull-stream')
+var pl         = require('pull-level')
+var LiveStream = require('level-live-stream')
+var through    = require('through')
 
-var dbs = {}
-var servers = {}
+var master     = require('./master-db')
+var createDb   = require('./db')
 
-var createDb = require('./db')
+var prefix     = '/ws/([\\w-\\d]+)'
+var rxWs       = new RegExp('^'+prefix)
+var rxHttp     = /^\/http\/([\w-\d]+)/
+
+var dbs        = {}
+var servers    = {}
 
 function applyPrefix(url, handler) {
   return function (req, res, next) {
@@ -36,38 +42,33 @@ function getId(rx, string) {
   return id && dbs[id] ? id : null
 }
 
-var bundles = master.sublevel('bundles')
+var bundles   = master.sublevel('bundles')
+var logs      = master.sublevel('logs')
+var logStream = logs.createWriteStream()
 
-var wrapped = {
-  put: function (key, value, cb) {
-    master.put(key, value, function (err) {
-      if(err) return cb(err)
-      var db = dbs[key] = dbs[key] || createDb(key)
-      db.update(value, function (err) {
-        cb(err)
-      })
-    })
-  },
-  del: function (key, cb) {
-    master.del(key, function (err) {
-      if(err) return cb(err)
-      var db = dbs[key]
-      //this should error as above, but anyway...
-      if(!db) return cb(new Error('db does not exist'))
-      db.once('closed', cb)
-      db.close()
-    })
-  },
-  get: function (key, cb) {
-    master.get(key, cb)
-  }
-}
+// *************************************
+//  XXX: TODO: save logs in another db. 
+// *************************************
 
 function log(req, res, next) {
   console.error(
     req.method, req.url, Date.now()
   )
   next()
+}
+
+function tail(name, opts) {
+  opts.min = name + '\x00' + (opts.since || Date.now())
+
+  for(var k in opts)
+    if(opts[k] === 'false') opts[k] = false
+
+  opts.max = name + '\x00\xff'
+
+  return LiveStream(logs, opts)
+    .on('data', function (data) {
+      try { data.value = JSON.parse(data.value) } catch (_) {}
+    })
 }
 
 module.exports = function (config, cb) {
@@ -90,16 +91,35 @@ module.exports = function (config, cb) {
       // update server.
       //... but we need an up and a down update...
       //which will be async...
-      log,
-      applyPrefix('/data', static(wrapped)), //TODO: add auth!
+      //      log,
+      function (req, res, next) {
+        var u = url.parse(req.url)
+        req.opts = qs.parse(u.query)
+        req.pathname = u.pathname
+        next()
+      },
+      applyPrefix('/log', function (req, res, next) {
+        var m = /\/([\w-\d]+)/.exec(req.url)
+        var name = m && m[1]
+        if(!dbs[name])
+          return next(new Error('no database:'+name))
+        req.resume()
+          
+        tail(name, req.opts)
+          .pipe(through(function (data) {
+            this.queue(JSON.stringify(data) + '\n')
+          })).pipe(res)
+      }),
+      applyPrefix('/data', static(bundles)), //TODO: add auth!
       function (req, res, next) {
         var id = getId(rxHttp, req.url)
-        console.log('MATCH?', rxHttp, req.url, id)
+
         if(!id)
           return next(new Error('no service at '+req.url))
-
+      
         if(!dbs[id].db.listeners('http_connection').length) //404
           return next(new Error('no handler for "http_connection"'))
+      
         dbs[id].db.emit('http_connection', req, res)
       },
       function (error, req, res, next) {
@@ -115,6 +135,38 @@ module.exports = function (config, cb) {
     })
   , prefix)
 
+  // instead of creating a new db on each update
+  // just tail the database, and update dbs that way!
+  // this essentially just syncronizes the state of the dbs
+  // with the state of the dbs.
+  //
+  // SO Simple!
+
+  pl.read(bundles, {tail: true})
+    .pipe(pull.drain(function (data) {
+      var key = data.key
+      var bundle = data.value
+      if(bundle) {
+        
+        var db = dbs[key]
+
+        if(!db) {
+          db = dbs[key] = createDb(key)
+          db.on('log', function (event, value) {
+            logStream.write({
+              key: key + '\x00' + timestamp(),
+              value: JSON.stringify({event: event, value: value})
+            })
+          })
+        }
+
+        db.update(bundle)
+      }  else {
+        var db = dbs[key]
+        if(db) db.close()
+      }
+    }))
+
   return server
 }
 
@@ -124,3 +176,4 @@ if(!module.parent) {
     console.log('listening on', config.port)
   })
 }
+
