@@ -1,6 +1,8 @@
 var http       = require('http')
 var url        = require('url')
 var qs         = require('querystring')
+var fs         = require('fs')
+var path       = require('path')
 
 var shoe       = require('shoe')
 var stack      = require('stack')
@@ -26,6 +28,8 @@ var rxHttp     = /^\/http\/([\w-\d]+)/
 
 var dbs        = {}
 var servers    = {}
+
+var intro = fs.readFileSync(path.join(__dirname, 'intro.md'))
 
 function applyPrefix(url, handler) {
   return function (req, res, next) {
@@ -122,6 +126,9 @@ module.exports = function (config, cb) {
           return next(new Error('no handler for "http_connection"'))
       
         dbs[id].db.emit('http_connection', req, res)
+      }),
+      route(/./, function (req, res, next) {
+        res.end(intro)
       }),
       function (error, req, res, next) {
         res.writeHead(error.status || 404)
