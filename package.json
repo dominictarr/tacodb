@@ -22,7 +22,8 @@
     "level-live-stream": "~1.4.3",
     "through": "~2.3.4",
     "date.js": "~0.1.1",
-    "split": "~0.2.5"
+    "split": "~0.2.5",
+    "monotonic-timestamp": "0.0.8"
   },
   "bin": "./cmd.js",
   "devDependencies": {
