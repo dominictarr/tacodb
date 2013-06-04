@@ -13,7 +13,7 @@
     "level-static": "~1.0.6",
     "stream-to-pull-stream": "~1.2.1",
     "request": "~2.21.0",
-    "securify": ">=1.1 <2",
+    "securify": ">=1.1.6 <2",
     "mkdirp": "~0.3.5",
     "rc": "~0.3.0",
     "level": ">=0.8 <1",
