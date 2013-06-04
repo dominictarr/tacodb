@@ -24,6 +24,7 @@
     "date.js": "~0.1.1",
     "split": "~0.2.5"
   },
+  "bin": "./cmd.js",
   "devDependencies": {
     "tape": "~1.0.2",
     "pull-level": "~1.1.3"
