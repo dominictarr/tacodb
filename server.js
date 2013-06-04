@@ -15,6 +15,7 @@ var toPull     = require('stream-to-pull-stream')
 var pl         = require('pull-level')
 var LiveStream = require('level-live-stream')
 var through    = require('through')
+var route      = require('tiny-route')
 
 var master     = require('./master-db')
 var createDb   = require('./db')
@@ -31,6 +32,7 @@ function applyPrefix(url, handler) {
     if(url !== req.url.substring(0, url.length))
       return next()
     req.url = req.url.substring(url.length)
+    if(!req.url) req.url = '/'
     handler(req, res, next)
   }
 }
@@ -111,9 +113,8 @@ module.exports = function (config, cb) {
           })).pipe(res)
       }),
       applyPrefix('/data', static(bundles)), //TODO: add auth!
-      function (req, res, next) {
-        var id = getId(rxHttp, req.url)
-
+      route(rxHttp, function (req, res, next) {
+        var id = req.params[0]
         if(!id)
           return next(new Error('no service at '+req.url))
       
@@ -121,7 +122,7 @@ module.exports = function (config, cb) {
           return next(new Error('no handler for "http_connection"'))
       
         dbs[id].db.emit('http_connection', req, res)
-      },
+      }),
       function (error, req, res, next) {
         res.writeHead(error.status || 404)
         res.end(JSON.stringify({
