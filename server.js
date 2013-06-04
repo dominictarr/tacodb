@@ -91,7 +91,7 @@ module.exports = function (config, cb) {
       // update server.
       //... but we need an up and a down update...
       //which will be async...
-      //      log,
+      log,
       function (req, res, next) {
         var u = url.parse(req.url)
         req.opts = qs.parse(u.query)
