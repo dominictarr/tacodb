@@ -10,7 +10,7 @@
   "dependencies": {
     "shoe": "0.0.10",
     "stack": "~0.1.0",
-    "level-static": "~1.0.6",
+    "level-static": "~1.0.8",
     "stream-to-pull-stream": "1.2",
     "request": "~2.21.0",
     "securify": ">=1.1.7 <2",
