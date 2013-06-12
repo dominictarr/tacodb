@@ -95,6 +95,18 @@ and print all config as JSON.
 tacodb logs --name foo --tail --since now
 ```
 
+## SmartOS Deploy 
+
+Running the following actions will enable tacodb as a service on SmartOS
+The default is port 8000 as defined in the ```exec_method``` tag.
+N.B Test on Standard64 1.0.7 with a downloaded install of node.js 0.10.10 
+
+```
+# cd deploy
+# svccfg import tacodb-service-manifest.xml 
+# svcadm enable tacodb-service
+```
+
 ## License
 
 MIT
