@@ -22,6 +22,7 @@ var commands = {
       )
   },
   update: function (config, cb) {
+    console.error(config)
     bundle(
       config.main || config._[0] || './index.js'
     , function (err, bundle) {
@@ -41,7 +42,7 @@ var commands = {
     var dir = path.join(config.root, config.name)
     var db = levelup(dir)//, {encoding: 'json'})
 
-    var setup = require(path.resolve(config.main || 'index.js'))
+    var setup = require(path.resolve(config.main || config._[0] || './index.js'))
     setup(db)
     shoe(function (stream) {
       db.emit('connection', stream)
