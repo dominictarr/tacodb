@@ -1,4 +1,3 @@
-changes/
 ~/c/tacodb/examples/changes ~/c/tacodb/examples
 ## Add real time logging
 
@@ -53,7 +52,6 @@ echo 'Good Bye!' | curl -sSNT . localhost:8000/bye
 
 
 ~/c/tacodb/examples
-http/
 ~/c/tacodb/examples/http ~/c/tacodb/examples
 ## connecting to tacodb/level via http
 
@@ -89,10 +87,8 @@ HELLO!
 
 
 ~/c/tacodb/examples
-node_modules/
 ~/c/tacodb/examples/node_modules ~/c/tacodb/examples
 ~/c/tacodb/examples
-ws/
 ~/c/tacodb/examples/ws ~/c/tacodb/examples
 ## connect to tacodb/level over websockets
 
