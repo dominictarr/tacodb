@@ -4,6 +4,8 @@ Create a database customization file...
 This will expose an http interface,
 that can store files inside leveldb.
 
+### simple http access
+
 ``` js
 //examples/http/index.js
 

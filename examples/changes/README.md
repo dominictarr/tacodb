@@ -3,13 +3,15 @@
 `level-static` extend the simple http example,
 so that we can track changes as they occur.
 
+### changes http with changes feed.
+
 ``` js
 //examples/changes/index.js
 
 {{{!cat index.js}}}
 ```
 
-start the server...
+### start the server...
 
 ``` sh
 tacodb local ./index.js --name changes

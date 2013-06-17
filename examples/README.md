@@ -4,6 +4,8 @@ Create a database customization file...
 This will expose an http interface,
 that can store files inside leveldb.
 
+### simple http access
+
 ``` js
 //examples/http/index.js
 
@@ -36,6 +38,8 @@ HELLO!
 `level-static` extend the simple http example,
 so that we can track changes as they occur.
 
+### changes http with changes feed.
+
 ``` js
 //examples/changes/index.js
 
@@ -62,7 +66,7 @@ module.exports = function (db) {
 
 ```
 
-start the server...
+### start the server...
 
 ``` sh
 tacodb local ./index.js --name changes
@@ -87,7 +91,7 @@ echo 'Good Bye!' | curl -sSNT . localhost:8000/bye
 
 Create a streaming connection with websockets!
 
-First, the server:
+### server with websockets & multilevel:
 
 ``` js
 //examples/ws/server.js
@@ -114,7 +118,7 @@ module.exports = function (db) {
 
 ```
 
-Then, the client.
+### brower/node client with websockets
 
 ``` js
 //examples/ws/client.js
@@ -161,6 +165,8 @@ reconnect(function(stream) {
 ```
 
 this client can be used from both the browser and node.js!
+
+### running the server & client
 
 start the server
 ``` sh

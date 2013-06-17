@@ -2,7 +2,7 @@
 
 Create a streaming connection with websockets!
 
-First, the server:
+### server with websockets & multilevel:
 
 ``` js
 //examples/ws/server.js
@@ -10,7 +10,7 @@ First, the server:
 {{{!cat ./server.js}}}
 ```
 
-Then, the client.
+### brower/node client with websockets
 
 ``` js
 //examples/ws/client.js
@@ -19,6 +19,8 @@ Then, the client.
 ```
 
 this client can be used from both the browser and node.js!
+
+### running the server & client
 
 start the server
 ``` sh
