@@ -52,10 +52,6 @@ var bundles   = master.sublevel('bundles')
 var logs      = master.sublevel('logs')
 var logStream = logs.createWriteStream()
 
-// *************************************
-//  XXX: TODO: save logs in another db. 
-// *************************************
-
 function log(req, res, next) {
   console.error(
     req.method, req.url, Date.now()
@@ -119,9 +115,10 @@ module.exports = function (config, cb) {
       applyPrefix('/data', static(bundles)), //TODO: add auth!
       route(rxHttp, function (req, res, next) {
         var id = req.params[0]
-        if(!id)
+
+        if(!id || !dbs[id])
           return next(new Error('no service at '+req.url))
-      
+
         if(!dbs[id].db.listeners('http_connection').length) //404
           return next(new Error('no handler for "http_connection"'))
       
@@ -154,13 +151,14 @@ module.exports = function (config, cb) {
     .pipe(pull.drain(function (data) {
       var key = data.key
       var bundle = data.value
+
       if(bundle) {
-        
         var db = dbs[key]
 
         if(!db) {
           db = dbs[key] = createDb(key)
           db.on('log', function (event, value) {
+            if(config.log) console.error(event, value)
             logStream.write({
               key: key + '\x00' + timestamp(),
               value: JSON.stringify({event: event, value: value})
