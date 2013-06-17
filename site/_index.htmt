@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>{{{!himark --css}}}</style>
+  <style>
+    .tab { display: none; }
+    #about { display: block; }
+  </style>
+  </head>
+<body>
+
+<ol>
+  <li><a href=#about>about</a></li>
+  <li><a href=#faq>FAQ</a></li>
+  <li><a href=#features>features</a></li>
+  <li><a href=#examples>examples</a></li>
+  <li><a href=#install>installation</a></li>
+</ol>
+
+<div id=about class=tab>
+  {{{!himark ./about.md}}}
+</div>
+
+<div id=faq class=tab>
+  {{{!himark ../docs/faq.md}}}
+</div>
+
+<div id=features class=tab>
+  {{{!himark ../docs/features.md}}}
+</div>
+
+<div id=examples class=tab>
+  {{{!himark ../examples/README.md}}}
+</div>
+
+<div id=install class=tab>
+  {{{!himark ./install.md}}}
+</div>
+
+</body>
+  <script>
+    function onHash () {
+      var hash = window.location.hash
+      hash = hash.substring(1)
+      var els = document.getElementsByClassName('tab')
+      var shown = false
+      for(var i in els) {
+        if(els[i].style)
+          els[i].style.display = 'none'
+      }
+      
+      var el = document.getElementById(hash)
+      if(!el) {
+        console.log('not found:', hash)
+        el = document.getElementById('about')
+      }
+      el.style.display = 'block'
+    }
+    window.onhashchange = onHash
+
+    onHash()
+  </script>
+
+</html>
