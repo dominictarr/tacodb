@@ -24,8 +24,9 @@
     "date.js": "~0.1.1",
     "split": "~0.2.5",
     "monotonic-timestamp": "0.0.8",
-    "tiny-route": "~1.0.0",
-    "pull-stream": "~2.18.2"
+    "tiny-route": "~1.1.0",
+    "pull-stream": "~2.18.2",
+    "pull-glob": "~1.0.0"
   },
   "bin": "./cmd.js",
   "devDependencies": {

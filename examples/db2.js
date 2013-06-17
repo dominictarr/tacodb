@@ -6,6 +6,7 @@ return module.exports = function (db) {
 
   db.options.valueEncoding = 'json'
 
+  //map-reduce depends on sublevel support being added to the database.
   sublevel(db)
 
   MapReduce(db, 'map', function (key, value, emit) {

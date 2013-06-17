@@ -1,0 +1,9 @@
+{
+  "name": "http",
+  "version": "0.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "level-static": "~1.0.7"
+  },
+  "license": "MIT"
+}

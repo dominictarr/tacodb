@@ -22,7 +22,6 @@ var commands = {
       )
   },
   update: function (config, cb) {
-    console.error(config)
     bundle(
       config.main || config._[0] || './index.js'
     , function (err, bundle) {
@@ -39,23 +38,31 @@ var commands = {
     })
   },
   local: function (config, cb) {
+    if(!config.name) {
+      console.error('must provide --name NAME')
+      process.exit(1)
+    }
+    var main = config.main || config._[0] || './index.js'
     var dir = path.join(config.root, config.name)
     var db = levelup(dir)//, {encoding: 'json'})
 
-    var setup = require(path.resolve(config.main || config._[0] || './index.js'))
+
+    var setup = require(path.resolve(main))
     setup(db)
     shoe(function (stream) {
       db.emit('connection', stream)
     }).install(
       http.createServer(function (req, res) {
         db.emit('http_connection', req, res)
-      }).listen(config.port), '/ws/' + config.name
+      }).listen(config.port, function () {
+        console.error('tacodb listening on:', config.port)
+      }), '/ws/' + config.name
     )
   },
   start: function (config, cb) {
     require('./server')(config, function (err) {
       if(err) return cb(err)
-      console.error('listening on:', config.port)
+      console.error('tacodb listening on:', config.port)
       cb()
     })
   },
@@ -77,6 +84,14 @@ var commands = {
     .pipe(through(console.log))
 
     cb()
+  },
+  //install tacodb plugin.
+  install: function (config, cb) {
+    var args = config._.slice()
+    console.error('installing tacodb extension:', args.join(' '))
+    args.unshift('install')
+    cp.spawn('npm', args, {stdio: 'inherit', cwd: __dirname})
+    .on('exit', cb)
   }
 }
 
