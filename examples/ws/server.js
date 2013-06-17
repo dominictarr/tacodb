@@ -1,9 +1,12 @@
 var multilevel = require('multilevel')
 var fs         = require('fs')
-var index = fs.readFileSync(__dirname + '/index.html','utf8')
-
-console.log(index.length)
-
+var index
+try {
+  index = fs.readFileSync(__dirname + '/index.html','utf8')
+} catch (err) {
+  console.error("run `npm run build` to generate the html file")
+  throw err
+}
 module.exports = function (db) {
   db.on('http_connection', function (req, res) {
     req.resume()

@@ -5,6 +5,8 @@ var reconnect  = require('reconnect/sock')
 //This client works from both the browser and in node!
 //WebSockets everywhere!
 
+//use `npm run build` to generate the index.html file.
+
 var node = process.title != 'browser'
 
 var log = (node ? console.log :
