@@ -15,6 +15,8 @@ bundled (a la browserify) and sent to the tacodb server via http.
 
 start by installing `tacodb`
 
+[more examples](https://github.com/dominictarr/tacodb/blob/master/examples/README.md)
+
 ``` js
 npm install -g tacodb
 ```
@@ -102,9 +104,9 @@ The default is port 8000 as defined in the ```exec_method``` tag.
 N.B Test on Standard64 1.0.7 with a downloaded install of node.js 0.10.10 
 
 ```
-# cd deploy
-# svccfg import tacodb-service-manifest.xml 
-# svcadm enable tacodb-service
+> cd deploy
+> svccfg import tacodb-service-manifest.xml 
+> svcadm enable tacodb-service
 ```
 
 ## License
