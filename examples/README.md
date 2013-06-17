@@ -1,3 +1,36 @@
+## connecting to tacodb/level via http
+
+Create a database customization file...
+This will expose an http interface,
+that can store files inside leveldb.
+
+``` js
+//examples/http/index.js
+
+var static = require('level-static')
+
+module.exports = function (db) {
+  db.on('http_connection', static(db))
+}
+
+```
+
+``` 
+>tacodb local static.js --name static
+listening on 8000
+```
+
+This starts a tacodb server running around your `db.js` file.
+
+``` js
+#http PUT hi = HELLO
+echo 'HELLO!' | curl -sSNT . localhost:8000/hi
+#http GET hi
+curl localhost:8000/hi
+HELLO!
+```
+
+
 ## Add real time logging
 
 `level-static` extend the simple http example,
@@ -50,42 +83,6 @@ echo 'Good Bye!' | curl -sSNT . localhost:8000/bye
 ```
 
 
-~/c/tacodb/examples
-## connecting to tacodb/level via http
-
-Create a database customization file...
-This will expose an http interface,
-that can store files inside leveldb.
-
-``` js
-//examples/http/index.js
-
-var static = require('level-static')
-
-module.exports = function (db) {
-  db.on('http_connection', static(db))
-}
-
-```
-
-``` 
->tacodb local static.js --name static
-listening on 8000
-```
-
-This starts a tacodb server running around your `db.js` file.
-
-``` js
-#http PUT hi = HELLO
-echo 'HELLO!' | curl -sSNT . localhost:8000/hi
-#http GET hi
-curl localhost:8000/hi
-HELLO!
-```
-
-
-~/c/tacodb/examples
-~/c/tacodb/examples
 ## connect to tacodb/level over websockets
 
 Create a streaming connection with websockets!
@@ -179,4 +176,3 @@ node client.js
 or from the [browser](http://localhost:8000/)
 
 
-~/c/tacodb/examples
