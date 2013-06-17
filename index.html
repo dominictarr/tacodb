@@ -1,1 +1,635 @@
-site/index.html
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>pre {
+  background-color: rgb(248, 248, 248);
+  border: 1px solid rgb(221, 221, 221);
+  padding:  6px 10px 6px 10px;
+}
+
+.highlight {
+//  background: #ffffff;
+}
+
+.highlight .c {
+  color: #999988;
+  font-style: italic;
+}
+
+.highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+
+.highlight .k {
+  font-weight: bold;
+}
+
+.highlight .o {
+  font-weight: bold;
+}
+
+.highlight .cm {
+  color: #999988;
+  font-style: italic;
+}
+
+.highlight .cp {
+  color: #999999;
+  font-weight: bold;
+}
+
+.highlight .c1 {
+  color: #999988;
+  font-style: italic;
+}
+
+.highlight .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.highlight .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+
+.highlight .gd .x {
+  color: #000000;
+  background-color: #ffaaaa;
+}
+
+.highlight .ge {
+  font-style: italic;
+}
+
+.highlight .gr {
+  color: #aa0000;
+}
+
+.highlight .gh {
+  color: #999999;
+}
+
+.highlight .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+
+.highlight .gi .x {
+  color: #000000;
+  background-color: #aaffaa;
+}
+
+.highlight .go {
+  color: #888888;
+}
+
+.highlight .gp {
+  color: #555555;
+}
+
+.highlight .gs {
+  font-weight: bold;
+}
+
+.highlight .gu {
+  color: #800080;
+  font-weight: bold;
+}
+
+.highlight .gt {
+  color: #aa0000;
+}
+
+.highlight .kc {
+  font-weight: bold;
+}
+
+.highlight .kd {
+  font-weight: bold;
+}
+
+.highlight .kn {
+  font-weight: bold;
+}
+
+.highlight .kp {
+  font-weight: bold;
+}
+
+.highlight .kr {
+  font-weight: bold;
+}
+
+.highlight .kt {
+  color: #445588;
+  font-weight: bold;
+}
+
+.highlight .m {
+  color: #009999;
+}
+
+.highlight .s {
+  color: #d14;
+}
+
+.highlight .n {
+  color: #333333;
+}
+
+.highlight .na {
+  color: #008080;
+}
+
+.highlight .nb {
+  color: #0086B3;
+}
+
+.highlight .nc {
+  color: #445588;
+  font-weight: bold;
+}
+
+.highlight .no {
+  color: #008080;
+}
+
+.highlight .ni {
+  color: #800080;
+}
+
+.highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+
+.highlight .nf {
+  color: #990000;
+  font-weight: bold;
+}
+
+.highlight .nn {
+  color: #555555;
+}
+
+.highlight .nt {
+  color: #000080;
+}
+
+.highlight .nv {
+  color: #008080;
+}
+
+.highlight .ow {
+  font-weight: bold;
+}
+
+.highlight .w {
+  color: #bbbbbb;
+}
+
+.highlight .mf {
+  color: #009999;
+}
+
+.highlight .mh {
+  color: #009999;
+}
+
+.highlight .mi {
+  color: #009999;
+}
+
+.highlight .mo {
+  color: #009999;
+}
+
+.highlight .sb {
+  color: #d14;
+}
+
+.highlight .sc {
+  color: #d14;
+}
+
+.highlight .sd {
+  color: #d14;
+}
+
+.highlight .s2 {
+  color: #d14;
+}
+
+.highlight .se {
+  color: #d14;
+}
+
+.highlight .sh {
+  color: #d14;
+}
+
+.highlight .si {
+  color: #d14;
+}
+
+.highlight .sx {
+  color: #d14;
+}
+
+.highlight .sr {
+  color: #009926;
+}
+
+.highlight .s1 {
+  color: #d14;
+}
+
+.highlight .ss {
+  color: #990073;
+}
+
+.highlight .bp {
+  color: #999999;
+}
+
+.highlight .vc {
+  color: #008080;
+}
+
+.highlight .vg {
+  color: #008080;
+}
+
+.highlight .vi {
+  color: #008080;
+}
+
+.highlight .il {
+  color: #009999;
+}
+
+
+</style>
+  <style>
+    .tab { display: none; }
+    #about { display: block; }
+  </style>
+  </head>
+<body>
+
+<ol>
+  <li><a href=#about>about</a></li>
+  <li><a href=#faq>FAQ</a></li>
+  <li><a href=#features>features</a></li>
+  <li><a href=#examples>examples</a></li>
+  <li><a href=#install>installation</a></li>
+</ol>
+
+<div id=about class=tab>
+  <h2>About tacodb</h2>
+<p>tacodb is a reusable server that wraps leveldb,
+tacodb/level represents a radical new approach to databases:</p>
+<ul>
+<li>A responsive database for responsive applications, core features strongly suite realtime.</li>
+<li>You build your own database by assembling community developed plugins, installed via <a href="https://npmjs.org">npm</a>.</li>
+<li>Since each feature is a plugin, new features are rapidly developed and integrated.</li>
+<li>since all features are implemented it javascript - level can be used in the <em>web browser</em>,
+with <a href="https://github.com/maxogden/level.js">level.js</a></li>
+</ul>
+
+
+</div>
+
+<div id=faq class=tab>
+  <h2>what is tacodb based on?</h2>
+<p>tacodb is based on leveldb, an open source database library, created by google.</p>
+<h2>where else is leveldb used?</h2>
+<p>leveldb was originally developed to be used in google-chrome to implement
+<a href="https://developer.mozilla.org/en-US/docs/IndexedDB">indexedDb</a>, it&#39;s
+also become popular as a back end for a number of database projects.
+<a href="http://basho.com/">riak</a> and <a href="http://hyperdex.org/">HyperDex</a> both use
+a fork of leveldb.</p>
+<h2>installation</h2>
+<pre><code>npm install -g tacodb</code></pre>
+<h2>Why not just use mongo, couch or redis?</h2>
+<p>tacodb is a responsive database, for responsive applications.</p>
+<p>instead of quering the database - you effectively tell the 
+database what you are interested in, and then the database
+tells you when that changes.</p>
+<p>If you are building an application about the real-time interactions of humans,
+then tacodb/level is perfect.</p>
+<h2>why implement a database in node.js?</h2>
+<p>node.js is a performant framework for implementing servers,
+it combines this tight performant core with a vibrant ecosystem of modules
+installed via <code>npm</code>, it&#39;s package manager.</p>
+<p>javascript allows the community to rapidly iterate on new features,
+and also dramatically lower the barrier to entry to work on database stuff.</p>
+<h2>how do i X?</h2>
+<p>The core feature set of tacodb/level is very simple,
+if you want something complex, the first thing you do is
+install a plugin. many are available! most node.js level plugins are 
+named <code>level-SOMETHING</code>, thus the node.js ecosystem is known as &quot;level-*&quot;</p>
+<p><a href="https://npmjs.org/search?q=level-&amp;page=0">search level-* modules</a></p>
+<h2>how can I get involved with level-*</h2>
+<p>join the irc room, ##leveldb on irc.freenode.net.</p>
+
+
+</div>
+
+<div id=features class=tab>
+  <table>
+<tr>
+  <th> Feature\Database</th>
+
+  <th>tacodb/level</th>
+    <th>mongo</th>
+      <th>couch</th>
+        <th>redis</th>
+          <th>MySql</th>
+</tr>
+<tr>
+  <th> key-value </th>
+
+    <td> yes </td>
+      <td> yes </td>
+        <td> yes </td>
+          <td> yes </td>
+            <td> no </td>
+</tr>
+<tr>
+  <th> Range Queries </th>
+    <td> yes </td>
+      <td> yes </td>
+        <td> pouch </td>
+          <td> yes </td>
+            <td> yes <td>
+</tr>
+<tr>
+  <th> Update Notifications? </th>
+   <td> yes </td>
+     <td> no </td>
+       <td> _changes feed </td>
+         <td> pub/sub </td>
+           <td> triggers </td>
+</tr>
+<tr>
+  <th> Internal Format </th>
+    <td> binary/configurable </td>
+      <td> BSON </td>
+        <td> JSON </td>
+          <td> binary/text </td>
+            <td> typed </td>
+</tr>
+<tr>
+  <th> Runs on Web? </th>
+    <td> yes </td>
+      <td> no </td>
+        <td> yes </td>
+          <td> no </td>
+            <td> no </td>
+</tr>
+<tr>
+  <th> Runs on Mobile? </th>
+    <td> on phonegap &amp; mobile browser </td>
+      <td> no </td>
+        <td> pouch </td>
+          <td> no </td>
+            <td> no </td>
+</tr>
+<tr>
+  <th> Schema/Validation </th>
+    <td> via plugin </td>
+      <td> no </td>
+        <td> yes </td>
+          <td> no </td>
+            <td> yes </td>
+</tr>
+<tr>
+  <th> RESTful/Http Interface </th>
+    <td> via plugin </td>
+      <td> no </td>
+        <td> yes </td>
+          <td> no  </td>
+            <td> no </td>
+</tr>
+<tr>
+  <th> Streaming/WebSockets </th>
+    <td> yes </td>
+      <td> no </td>
+        <td> no </td>
+          <td> no </td>
+            <td> no </td>
+</tr>
+<tr>
+  <th> Graph/Recursive Queries </th>
+    <td> via plugin </td>
+      <td> no </td>
+        <td> no </td>
+          <td> no </td>
+            <td> no </td>
+</tr>
+<tr>
+  <th> Full Text Index </th>
+    <td> via plugin </td>
+      <td> yes </td>
+        <td> no </td>
+          <td> no </td>
+            <td> yes </td>
+</tr>
+<tr>
+  <th> Pluggable? </th>
+    <td> Yes! </td>
+      <td> no </td>
+        <td> no </td>
+          <td> no </td>
+            <td> no </td>
+</tr>
+<tr>
+  <th> master-slave replication </th>
+    <td> via plugin </td>
+      <td> yes </td>
+        <td> no </td>
+          <td> yes </td>
+            <td> yes </td>
+</tr>
+<tr>
+  <th> master-master replication </th>
+    <td> via plugin </td>
+      <td> no </td>
+        <td> yes </td>
+          <td> no </td>
+            <td> yes </td>
+</tr>
+</table>
+
+
+
+</div>
+
+<div id=examples class=tab>
+  <h2>connecting to tacodb/level via http</h2>
+<p>Create a database customization file...
+This will expose an http interface,
+that can store files inside leveldb.</p>
+<h3>simple http access</h3>
+<pre><code class="lang-js"><span class=highlight><span class=c>//examples/http/index.js
+</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>static</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>'level-static'</span><span class=p>)</span><span class=w>
+
+</span><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>db</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+  </span><span class=nx>db</span><span class=p>.</span><span class=nx>on</span><span class=p>(</span><span class=s2>'http_connection'</span><span class=p>,</span><span class=w> </span><span class=nx>static</span><span class=p>(</span><span class=nx>db</span><span class=p>)</span><span class=p>)</span><span class=w>
+</span><span class=p>}</span></span></code></pre>
+<pre><code>&gt;tacodb local static.js --name static
+listening on 8000</code></pre>
+<p>This starts a tacodb server running around your <code>db.js</code> file.</p>
+<pre><code class="lang-sh">#http PUT hi = HELLO
+echo &#39;HELLO!&#39; | curl -sSNT . localhost:8000/hi
+#http GET hi
+curl localhost:8000/hi
+HELLO!</code></pre>
+<h2>Add real time logging</h2>
+<p><code>level-static</code> extend the simple http example,
+so that we can track changes as they occur.</p>
+<h3>changes http with changes feed.</h3>
+<pre><code class="lang-js"><span class=highlight><span class=c>//examples/changes/index.js
+</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>static</span><span class=w>   </span><span class=p>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>'level-static'</span><span class=p>)</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>through</span><span class=w>  </span><span class=p>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>'through'</span><span class=p>)</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>route</span><span class=w>    </span><span class=p>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>'tiny-route'</span><span class=p>)</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>live</span><span class=w>     </span><span class=p>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>'level-live-stream'</span><span class=p>)</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>stack</span><span class=w>    </span><span class=p>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>'stack'</span><span class=p>)</span><span class=w>
+
+</span><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>db</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+  </span><span class=c>//level-static creates a http handling middleware around leveldb.
+</span><span class=w>  </span><span class=nx>db</span><span class=p>.</span><span class=nx>on</span><span class=p>(</span><span class=s2>'http_connection'</span><span class=p>,</span><span class=w> </span><span class=nx>stack</span><span class=p>(</span><span class=w>
+    </span><span class=nx>route</span><span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=s2>'/_changes'</span><span class=p>,</span><span class=w> </span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>req</span><span class=p>,</span><span class=w> </span><span class=nx>res</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+      </span><span class=nx>live</span><span class=p>(</span><span class=nx>db</span><span class=p>)</span><span class=w>
+        </span><span class=p>.</span><span class=nx>pipe</span><span class=p>(</span><span class=nx>through</span><span class=p>(</span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>data</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+          </span><span class=nx>this</span><span class=p>.</span><span class=nx>queue</span><span class=p>(</span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=nx>data</span><span class=p>)</span><span class=w> </span><span class=p>+</span><span class=w> </span><span class=s2>'\n'</span><span class=p>)</span><span class=w>
+        </span><span class=p>}</span><span class=p>)</span><span class=p>)</span><span class=w>
+        </span><span class=p>.</span><span class=nx>pipe</span><span class=p>(</span><span class=nx>res</span><span class=p>)</span><span class=w>
+      </span><span class=nx>req</span><span class=p>.</span><span class=nx>resume</span><span class=p>(</span><span class=p>)</span><span class=w>
+    </span><span class=p>}</span><span class=p>)</span><span class=p>,</span><span class=w>
+    </span><span class=nx>static</span><span class=p>(</span><span class=nx>db</span><span class=p>)</span><span class=w>
+  </span><span class=p>)</span><span class=p>)</span><span class=w>
+</span><span class=p>}</span></span></code></pre>
+<h3>start the server...</h3>
+<pre><code class="lang-sh">tacodb local ./index.js --name changes</code></pre>
+<p>Then, connect and stream changes like this:</p>
+<pre><code class="lang-sh">curl localhost:8000/_changes</code></pre>
+<p>Then in another terminal:</p>
+<pre><code class="lang-sh">echo &#39;Hi!&#39; | curl -sSNT . localhost:8000/hi
+echo &#39;whats up?&#39; | curl -sSNT . localhost:8000/wazzup
+echo &#39;Good Bye!&#39; | curl -sSNT . localhost:8000/bye</code></pre>
+<h2>connect to tacodb/level over websockets</h2>
+<p>Create a streaming connection with websockets!</p>
+<h3>server with websockets &amp; multilevel:</h3>
+<pre><code class="lang-js"><span class=highlight><span class=c>//examples/ws/server.js
+</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>multilevel</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>'multilevel'</span><span class=p>)</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>fs</span><span class=w>         </span><span class=p>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>'fs'</span><span class=p>)</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>index</span><span class=w>
+</span><span class=nx>try</span><span class=w> </span><span class=p>{</span><span class=w>
+  </span><span class=nx>index</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>fs</span><span class=p>.</span><span class=nx>readFileSync</span><span class=p>(</span><span class=nx>__dirname</span><span class=w> </span><span class=p>+</span><span class=w> </span><span class=s2>'/index.html'</span><span class=p>,</span><span class=s2>'utf8'</span><span class=p>)</span><span class=w>
+</span><span class=p>}</span><span class=w> </span><span class=nx>catch</span><span class=w> </span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+  </span><span class=nx>console</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=s1>"run `npm run build` to generate the html file"</span><span class=p>)</span><span class=w>
+  </span><span class=nx>throw</span><span class=w> </span><span class=nx>err</span><span class=w>
+</span><span class=p>}</span><span class=w>
+</span><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>db</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+  </span><span class=nx>db</span><span class=p>.</span><span class=nx>on</span><span class=p>(</span><span class=s2>'http_connection'</span><span class=p>,</span><span class=w> </span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>req</span><span class=p>,</span><span class=w> </span><span class=nx>res</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+    </span><span class=nx>req</span><span class=p>.</span><span class=nx>resume</span><span class=p>(</span><span class=p>)</span><span class=w>
+    </span><span class=nx>res</span><span class=p>.</span><span class=nx>end</span><span class=p>(</span><span class=nx>index</span><span class=p>)</span><span class=w>
+  </span><span class=p>}</span><span class=p>)</span><span class=w>
+  </span><span class=nx>db</span><span class=p>.</span><span class=nx>on</span><span class=p>(</span><span class=s2>'connection'</span><span class=p>,</span><span class=w> </span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>stream</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+    </span><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>'connect'</span><span class=p>)</span><span class=w>
+    </span><span class=nx>stream</span><span class=p>.</span><span class=nx>pipe</span><span class=p>(</span><span class=nx>multilevel</span><span class=p>.</span><span class=nx>server</span><span class=p>(</span><span class=nx>db</span><span class=p>)</span><span class=p>)</span><span class=p>.</span><span class=nx>pipe</span><span class=p>(</span><span class=nx>stream</span><span class=p>)</span><span class=w>
+  </span><span class=p>}</span><span class=p>)</span><span class=w>
+</span><span class=p>}</span></span></code></pre>
+<h3>brower/node client with websockets</h3>
+<pre><code class="lang-js"><span class=highlight><span class=c>//examples/ws/client.js
+</span><span class=w>
+
+</span><span class=kd>var</span><span class=w> </span><span class=nx>multilevel</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>'multilevel'</span><span class=p>)</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>reconnect</span><span class=w>  </span><span class=p>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>'reconnect/sock'</span><span class=p>)</span><span class=w>
+
+</span><span class=c>//This client works from both the browser and in node!
+</span><span class=c>//WebSockets everywhere!
+</span><span class=w>
+</span><span class=c>//use `npm run build` to generate the index.html file.
+</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>node</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>process</span><span class=p>.</span><span class=nx>title</span><span class=w> </span><span class=p>!</span><span class=p>=</span><span class=w> </span><span class=s2>'browser'</span><span class=w>
+
+</span><span class=kd>var</span><span class=w> </span><span class=nx>log</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>(</span><span class=nx>node</span><span class=w> </span><span class=p>?</span><span class=w> </span><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=w> </span><span class=p>:</span><span class=w>
+  </span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+    </span><span class=kd>var</span><span class=w> </span><span class=nx>data</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>[</span><span class=p>]</span><span class=p>.</span><span class=nx>slice</span><span class=p>.</span><span class=nx>call</span><span class=p>(</span><span class=nx>arguments</span><span class=p>)</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>e</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+      </span><span class=kd>return</span><span class=w> </span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=nx>e</span><span class=p>,</span><span class=w> </span><span class=nx>null</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>)</span><span class=w>
+    </span><span class=p>}</span><span class=p>)</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span><span class=s2>' '</span><span class=p>)</span><span class=w>
+    </span><span class=kd>var</span><span class=w> </span><span class=nx>pre</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>document</span><span class=p>.</span><span class=nx>createElement</span><span class=p>(</span><span class=s2>'pre'</span><span class=p>)</span><span class=w>
+    </span><span class=nx>pre</span><span class=p>.</span><span class=nx>innerText</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>data</span><span class=w>
+    </span><span class=nx>document</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>appendChild</span><span class=p>(</span><span class=nx>pre</span><span class=p>)</span><span class=w>
+  </span><span class=p>}</span><span class=p>)</span><span class=w>
+
+</span><span class=nx>reconnect</span><span class=p>(</span><span class=kd>function</span><span class=p>(</span><span class=nx>stream</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+  </span><span class=nx>log</span><span class=p>(</span><span class=s2>'connected!'</span><span class=p>)</span><span class=w>
+  </span><span class=kd>var</span><span class=w> </span><span class=nx>db</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>multilevel</span><span class=p>.</span><span class=nx>client</span><span class=p>(</span><span class=p>)</span><span class=w>
+  </span><span class=nx>stream</span><span class=p>.</span><span class=nx>pipe</span><span class=p>(</span><span class=nx>db</span><span class=p>)</span><span class=p>.</span><span class=nx>pipe</span><span class=p>(</span><span class=nx>stream</span><span class=p>)</span><span class=w>
+
+  </span><span class=nx>setInterval</span><span class=p>(</span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+    </span><span class=nx>db</span><span class=p>.</span><span class=nx>put</span><span class=p>(</span><span class=s2>'hi'</span><span class=p>,</span><span class=w> </span><span class=kd>new</span><span class=w> </span><span class=nx>Date</span><span class=p>(</span><span class=p>)</span><span class=p>,</span><span class=w> </span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+      </span><span class=nx>if</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=w> </span><span class=kd>return</span><span class=w> </span><span class=nx>console</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=w>
+      </span><span class=nx>db</span><span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=s2>'hi'</span><span class=p>,</span><span class=w> </span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>err</span><span class=p>,</span><span class=w> </span><span class=nx>value</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+        </span><span class=nx>if</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=w> </span><span class=kd>return</span><span class=w> </span><span class=nx>console</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=w>
+        </span><span class=nx>log</span><span class=p>(</span><span class=s2>'GET'</span><span class=p>,</span><span class=w> </span><span class=s2>'hi'</span><span class=p>,</span><span class=w> </span><span class=nx>value</span><span class=p>)</span><span class=w>
+      </span><span class=p>}</span><span class=p>)</span><span class=w>
+    </span><span class=p>}</span><span class=p>)</span><span class=w>
+  </span><span class=p>}</span><span class=p>,</span><span class=w> </span><span class=mi>1000</span><span class=p>)</span><span class=w>
+
+</span><span class=p>}</span><span class=p>)</span><span class=p>.</span><span class=nx>connect</span><span class=p>(</span><span class=nx>node</span><span class=w> </span><span class=p>?</span><span class=w> </span><span class=s2>'http://localhost:8000/ws/ws'</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=s2>'/ws/ws'</span><span class=p>)</span><span class=w>
+</span><span class=>//</span><span class=p>^</span><span class=w> </span><span class=nx>on</span><span class=w> </span><span class=nx>the</span><span class=w> </span><span class=nx>browser</span><span class=p>,</span><span class=w> </span><span class=nx>this</span><span class=w> </span><span class=nx>assumes</span><span class=w> </span><span class=nx>you</span><span class=w> </span><span class=nx>are</span><span class=w> </span><span class=nx>on</span><span class=w> </span><span class=nx>the</span><span class=w> </span><span class=nx>same</span><span class=w> </span><span class=nx>host</span><span class=w> </span><span class=nx>as</span><span class=w> </span><span class=nx>window</span><span class=p>.</span><span class=nx>location</span><span class=p>.</span><span class=p>.</span><span class=p>.</span></span></code></pre>
+<p>this client can be used from both the browser and node.js!</p>
+<h3>running the server &amp; client</h3>
+<p>start the server</p>
+<pre><code class="lang-sh">tacodb local server.js --name ws</code></pre>
+<p>connect from node:</p>
+<pre><code class="lang-sh">node client.js</code></pre>
+<p>or from the <a href="http://localhost:8000/">browser</a></p>
+
+
+</div>
+
+<div id=install class=tab>
+  <h2><code>npm install tacodb -g</code></h2>
+<p>that&#39;s all!</p>
+<p>code is on <a href="https://github.com/dominictarr/tacodb">github</a></p>
+
+
+</div>
+
+</body>
+  <script>
+    function onHash () {
+      var hash = window.location.hash
+      hash = hash.substring(1)
+      var els = document.getElementsByClassName('tab')
+      var shown = false
+      for(var i in els) {
+        if(els[i].style)
+          els[i].style.display = 'none'
+      }
+      
+      var el = document.getElementById(hash)
+      if(!el) {
+        console.log('not found:', hash)
+        el = document.getElementById('about')
+      }
+      el.style.display = 'block'
+    }
+    window.onhashchange = onHash
+
+    onHash()
+  </script>
+
+</html>
