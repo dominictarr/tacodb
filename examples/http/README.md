@@ -17,7 +17,7 @@ listening on 8000
 
 This starts a tacodb server running around your `db.js` file.
 
-``` js
+``` sh
 #http PUT hi = HELLO
 echo 'HELLO!' | curl -sSNT . localhost:8000/hi
 #http GET hi

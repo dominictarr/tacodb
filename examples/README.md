@@ -22,7 +22,7 @@ listening on 8000
 
 This starts a tacodb server running around your `db.js` file.
 
-``` js
+``` sh
 #http PUT hi = HELLO
 echo 'HELLO!' | curl -sSNT . localhost:8000/hi
 #http GET hi
@@ -64,19 +64,19 @@ module.exports = function (db) {
 
 start the server...
 
-``` js
+``` sh
 tacodb local ./index.js --name changes
 ```
 
 Then, connect and stream changes like this:
 
-```
+``` sh
 curl localhost:8000/_changes
 ```
 
 Then in another terminal:
 
-```
+``` sh
 echo 'Hi!' | curl -sSNT . localhost:8000/hi
 echo 'whats up?' | curl -sSNT . localhost:8000/wazzup
 echo 'Good Bye!' | curl -sSNT . localhost:8000/bye
@@ -163,13 +163,13 @@ reconnect(function(stream) {
 this client can be used from both the browser and node.js!
 
 start the server
-``` js
+``` sh
 tacodb local server.js --name ws
 ```
 
 connect from node:
 
-``` js
+``` sh
 node client.js
 ```
 

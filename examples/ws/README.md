@@ -21,13 +21,13 @@ Then, the client.
 this client can be used from both the browser and node.js!
 
 start the server
-``` js
+``` sh
 tacodb local server.js --name ws
 ```
 
 connect from node:
 
-``` js
+``` sh
 node client.js
 ```
 

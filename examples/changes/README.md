@@ -11,19 +11,19 @@ so that we can track changes as they occur.
 
 start the server...
 
-``` js
+``` sh
 tacodb local ./index.js --name changes
 ```
 
 Then, connect and stream changes like this:
 
-```
+``` sh
 curl localhost:8000/_changes
 ```
 
 Then in another terminal:
 
-```
+``` sh
 echo 'Hi!' | curl -sSNT . localhost:8000/hi
 echo 'whats up?' | curl -sSNT . localhost:8000/wazzup
 echo 'Good Bye!' | curl -sSNT . localhost:8000/bye
