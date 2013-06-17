@@ -1,0 +1,20 @@
+{
+  "name": "ws",
+  "version": "0.0.0",
+  "description": "connect to tacodb via websockets",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify client.js --debug | indexhtmlify > index.html"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "devDependencies": {
+    "indexhtmlify": "~1.0.0",
+    "browserify": "~2.18.1"
+  },
+  "dependencies": {
+    "reconnect": "~1.4"
+  }
+}

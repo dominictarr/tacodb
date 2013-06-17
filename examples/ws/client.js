@@ -1,16 +1,34 @@
 
 var multilevel = require('multilevel')
-var reconnect  = require('reconnect')
+var reconnect  = require('reconnect/sock')
+
+var node = process.title != 'browser'
+
+var log = (node ? console.log :
+  function () {
+    var data = [].slice.call(arguments).map(function (e) {
+      return JSON.stringify(e, null, 2)
+    }).join(' ')
+    var pre = document.createElement('pre')
+    pre.innerText = data
+    document.body.appendChild(pre)
+  })
+
+console.log(node ? 'node' : 'browser')
 
 reconnect(function(stream) {
+  log('connect!')
   var db = multilevel.client()
-  stream.pipe(db).pipe(db)
+  stream.pipe(db).pipe(stream)
 
-  db.put('hi', 'Hello', function (err) {
-    if(err) return console.error(err)
-    db.get('hi', function (err, value) {
+  setInterval(function () {
+    db.put('hi', new Date(), function (err) {
       if(err) return console.error(err)
-      console.log('GET', value)
+      db.get('hi', function (err, value) {
+        if(err) return console.error(err)
+        log('GET', 'hi', value)
+      })
     })
-  })
-}).connect('/ws/ws')
+  }, 1000)
+
+}).connect(node ? 'http://localhost:8000/ws/ws' : '/ws/ws')
