@@ -2,6 +2,9 @@
 var multilevel = require('multilevel')
 var reconnect  = require('reconnect/sock')
 
+//This client works from both the browser and in node!
+//WebSockets everywhere!
+
 var node = process.title != 'browser'
 
 var log = (node ? console.log :
@@ -14,10 +17,8 @@ var log = (node ? console.log :
     document.body.appendChild(pre)
   })
 
-console.log(node ? 'node' : 'browser')
-
 reconnect(function(stream) {
-  log('connect!')
+  log('connected!')
   var db = multilevel.client()
   stream.pipe(db).pipe(stream)
 
@@ -32,3 +33,4 @@ reconnect(function(stream) {
   }, 1000)
 
 }).connect(node ? 'http://localhost:8000/ws/ws' : '/ws/ws')
+//^ on the browser, this assumes you are on the same host as window.location...
