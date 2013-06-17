@@ -2,8 +2,8 @@
 
 {
   for r in */; do
-    pushd $r
-    test -f README.md &&  carpenter README.md
+    pushd $r > /dev/null
+    test -f README.md && carpenter README.md
     popd
   done
 } > README.md
