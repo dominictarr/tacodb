@@ -31,6 +31,13 @@ var dbs        = {}
 var servers    = {}
 
 var intro = fs.readFileSync(path.join(__dirname, 'intro.md'))
+var end = http.OutgoingMessage.prototype.end
+http.OutgoingMessage.prototype.end = function (data, enc) {
+  if(data) {
+    console.error('end:', data.constructor.name, data.length)
+  }
+  end.call(this, data, enc)
+}
 
 function applyPrefix(url, handler) {
   return function (req, res, next) {
@@ -117,8 +124,14 @@ module.exports = function (config, cb) {
       route(rxHttp, function (req, res, next) {
         var id = req.params[0]
 
+        if(!req.url) {
+          req.resume()
+          res.writeHead(302, {Location: '/http/' + id + '/'})
+          return res.end()
+        }
+
         if(!id || !dbs[id])
-          return next(new Error('no service at '+req.url))
+          return next(new Error('no service at '+id))
 
         if(!dbs[id].db.listeners('http_connection').length) //404
           return next(new Error('no handler for "http_connection"'))
