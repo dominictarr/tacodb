@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <style>pre {
-  background-color: rgb(248, 248, 248);
+  
+  <link rel="stylesheet" href="style/style.css"/>
+  <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+  
+  <style>
+  pre {
+  background-color: rgb(255, 255, 255);
   border: 1px solid rgb(221, 221, 221);
   padding:  6px 10px 6px 10px;
 }
@@ -220,7 +228,7 @@
 }
 
 .highlight .s2 {
-  color: #d14;
+  color: #0abe7e;
 }
 
 .highlight .se {
@@ -280,23 +288,28 @@
   </head>
 <body>
 
-<ol>
+
+<ol class="nav">
   <li><a href=#about>about</a></li>
   <li><a href=#faq>FAQ</a></li>
   <li><a href=#features>features</a></li>
+  <li><a href=#about class="logoalignment"><img src="img/logo.png"></a></li>
   <li><a href=#examples>examples</a></li>
   <li><a href=#install>installation</a></li>
 </ol>
 
+<div id="sombrero">
+</div>
+
 <div id=about class=tab>
-  <h2>About tacodb</h2>
+  <h2>about tacodb</h2>
 <p>tacodb is a reusable server that wraps leveldb,
 tacodb/level represents a radical new approach to databases:</p>
 <ul>
-<li>A responsive database for responsive applications, core features strongly suite realtime.</li>
-<li>You build your own database by assembling community developed plugins, installed via <a href="https://npmjs.org">npm</a>.</li>
-<li>Since each feature is a plugin, new features are rapidly developed and integrated.</li>
-<li>since all features are implemented it javascript - level can be used in the <em>web browser</em>,
+<li>&#8722; A responsive database for responsive applications, core features strongly suite realtime.</li>
+<li>&#8722; You build your own database by assembling community developed plugins, installed via <a href="https://npmjs.org">npm</a>.</li>
+<li>&#8722; Since each feature is a plugin, new features are rapidly developed and integrated.</li>
+<li>&#8722; Since all features are implemented it javascript - level can be used in the <em>web browser</em>,
 with <a href="https://github.com/maxogden/level.js">level.js</a></li>
 </ul>
 
@@ -336,18 +349,18 @@ named <code>level-SOMETHING</code>, thus the node.js ecosystem is known as &quot
 <h2>how can I get involved with level-*</h2>
 <p>join the irc room, ##leveldb on irc.freenode.net.</p>
 
-
 </div>
 
 <div id=features class=tab>
+<h2>features</h2>
   <table>
 <tr>
   <th> Feature\Database</th>
 
-  <th>tacodb/level</th>
-    <th>mongo</th>
-      <th>couch</th>
-        <th>redis</th>
+  <th>Tacodb/Level</th>
+    <th>Mongo</th>
+      <th>Couch</th>
+        <th>Redis</th>
           <th>MySql</th>
 </tr>
 <tr>
@@ -365,7 +378,7 @@ named <code>level-SOMETHING</code>, thus the node.js ecosystem is known as &quot
       <td> yes </td>
         <td> pouch </td>
           <td> yes </td>
-            <td> yes <td>
+            <td> yes </td>
 </tr>
 <tr>
   <th> Update Notifications? </th>
@@ -601,12 +614,13 @@ echo &#39;Good Bye!&#39; | curl -sSNT . localhost:8000/bye</code></pre>
 </div>
 
 <div id=install class=tab>
-  <h2><code>npm install tacodb -g</code></h2>
-<p>that&#39;s all!</p>
-<p>code is on <a href="https://github.com/dominictarr/tacodb">github</a></p>
+<h2>installation</h2>
+  <pre class="boxwidth">npm install tacodb -g</pre>
+<p>That&#39;s all! Code is on <a href="https://github.com/dominictarr/tacodb">github</a></p>
 
 
 </div>
+<div class="footer"></div>
 
 </body>
   <script>
@@ -630,6 +644,7 @@ echo &#39;Good Bye!&#39; | curl -sSNT . localhost:8000/bye</code></pre>
     window.onhashchange = onHash
 
     onHash()
-  </script>
-
+	
+	</script>
+ 
 </html>
