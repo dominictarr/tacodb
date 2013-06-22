@@ -18,6 +18,7 @@ var pl         = require('pull-level')
 var LiveStream = require('level-live-stream')
 var through    = require('through')
 var route      = require('tiny-route')
+var ecstatic   = require('ecstatic')
 
 var master     = require('./master-db')
 var createDb   = require('./db')
@@ -124,9 +125,7 @@ module.exports = function (config, cb) {
       
         dbs[id].db.emit('http_connection', req, res)
       }),
-      route(/./, function (req, res, next) {
-        res.end(intro)
-      }),
+      ecstatic(__dirname + '/site'),
       function (error, req, res, next) {
         res.writeHead(error.status || 404)
         res.end(JSON.stringify({

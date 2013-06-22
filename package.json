@@ -26,7 +26,8 @@
     "monotonic-timestamp": "0.0.8",
     "tiny-route": "~1.1.0",
     "pull-stream": "~2.18.2",
-    "pull-glob": "~1.0.0"
+    "pull-glob": "~1.0.0",
+    "ecstatic": "~0.4.5"
   },
   "bin": "./cmd.js",
   "devDependencies": {
