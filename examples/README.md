@@ -118,7 +118,7 @@ module.exports = function (db) {
 
 ```
 
-### brower/node client with websockets
+### browser/node client with websockets
 
 ``` js
 //examples/ws/client.js
